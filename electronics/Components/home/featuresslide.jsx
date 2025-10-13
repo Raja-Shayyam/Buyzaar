@@ -63,35 +63,12 @@ const FeaturedProducts = () => {
     },
   ];
 
-  const slide = [
-    {
-      id: 1,
-      img: "https://images.unsplash.com/photo-1603791452906-b4f3f8c7b63c?auto=format&fit=crop&w=1600&q=80",
-      title: "Massive Discounts on Smart Gadgets",
-      subtitle: "Style and Innovation for Everyone",
-      btnText: "Shop Now",
-    },
-    {
-      id: 2,
-      img: "https://images.unsplash.com/photo-1616628182501-1c7ac0a0a91a?auto=format&fit=crop&w=1600&q=80",
-      title: "Upgrade Your Smart Home",
-      subtitle: "AI-driven comfort and control at your fingertips",
-      btnText: "Explore Now",
-    },
-    {
-      id: 3,
-      img: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?auto=format&fit=crop&w=1600&q=80",
-      title: "Tech for Every Lifestyle",
-      subtitle: "Powerful performance meets modern design",
-      btnText: "Discover",
-    },
-  ];
 
   // const chunked = [];
   // for (let i = 0; i < products.length; i += 4) {
   //   chunked.push(products.slice(i, i + 4));
   // }
-    const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   // ✅ Auto-slide logic
   useEffect(() => {
@@ -115,9 +92,8 @@ const FeaturedProducts = () => {
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`carousel-slide ${
-            index === activeIndex ? "active" : ""
-          } position-absolute top-0 start-0 w-100 h-100`}
+          className={`carousel-slide ${index === activeIndex ? "active" : ""
+            } position-absolute top-0 start-0 w-100 h-100`}
           style={{
             backgroundImage: `url(${slide.img})`,
             backgroundSize: "cover",
@@ -141,8 +117,6 @@ const FeaturedProducts = () => {
             <h1
               className="fw-bold display-4 mb-3 a"
               style={{
-                // color: "#00e0ff",
-                // textShadow: "0 0 15px rgba(0,224,255,0.7)",
                 animation: "fadeInUp 1.2s ease",
               }}
             >
@@ -161,7 +135,6 @@ const FeaturedProducts = () => {
               className="btn btn-outline-info px-5 py-2 fw-semibold rounded-pill"
               style={{
                 borderColor: "#00e0ff",
-                // color: "#00e0ff",
                 animation: "fadeInUp 2s ease",
               }}
             >
@@ -171,40 +144,45 @@ const FeaturedProducts = () => {
         </div>
       ))}
 
-      {/* ✅ Manual Navigation Buttons */}
+      {/* ✅ Full-height Side Buttons */}
       <button
         onClick={prevSlide}
-        className="carousel-btn prev-btn btn position-absolute"
+        className="carousel-btn prev-btn btn position-absolute border-0"
         style={{
-          top: "50%",
-          left: "30px",
-          transform: "translateY(-50%)",
-          // backgroundColor: "rgba(0,224,255,0.6)",
-          backgroundColor:" #0072ff",
-          border: "none",
-          borderRadius: "50%",
-          padding: "12px 16px",
+          top: 0,
+          left: 0,
+          height: "100%",
+          width: "80px",
+          backgroundColor:
+            window.innerWidth < 768 ? "transparent" : "rgba(0, 115, 255, 0.08)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "background 0.3s ease",
           zIndex: 10,
         }}
       >
-        <ArrowLeft size={20} color="white" />
+        <ArrowLeft size={30} color="white" style={{ display: window.innerWidth < 768 ? "none" :'' }} />
       </button>
+
       <button
         onClick={nextSlide}
-        className="carousel-btn next-btn btn position-absolute"
+        className="carousel-btn next-btn btn position-absolute border-0"
         style={{
-          top: "50%",
-          right: "30px",
-          transform: "translateY(-50%)",
-          // backgroundColor: "rgba(0,224,255,0.6)",
-          backgroundColor: " #0072ff",
-          border: "none",
-          borderRadius: "50%",
-          padding: "12px 16px",
+          top: 0,
+          right: 0,
+          height: "100%",
+          width: "80px",
+          backgroundColor:
+            window.innerWidth < 768 ? "transparent" : "rgba(0, 115, 255, 0.08)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "background 0.3s ease",
           zIndex: 10,
         }}
       >
-        <ArrowRight size={20} color="white" />
+        <ArrowRight size={30} color="white" style={{ display: window.innerWidth < 768 ? "none" :'' }} />
       </button>
 
       {/* ✅ Indicators */}
@@ -232,6 +210,133 @@ const FeaturedProducts = () => {
         ))}
       </div>
     </section>
+
+
+    // <section className="hero-carousel position-relative overflow-hidden">
+    //   {slides.map((slide, index) => (
+    //     <div
+    //       key={slide.id}
+    //       className={`carousel-slide ${
+    //         index === activeIndex ? "active" : ""
+    //       } position-absolute top-0 start-0 w-100 h-100`}
+    //       style={{
+    //         backgroundImage: `url(${slide.img})`,
+    //         backgroundSize: "cover",
+    //         backgroundPosition: "center",
+    //         transition: "opacity 1s ease-in-out",
+    //         opacity: index === activeIndex ? 1 : 0,
+    //       }}
+    //     >
+    //       <div className="overlay position-absolute w-100 h-100"></div>
+
+    //       <div
+    //         className="carousel-caption d-flex flex-column justify-content-center align-items-start text-start"
+    //         style={{
+    //           top: 0,
+    //           bottom: 0,
+    //           left: "10%",
+    //           right: "10%",
+    //           zIndex: 5,
+    //         }}
+    //       >
+    //         <h1
+    //           className="fw-bold display-4 mb-3 a"
+    //           style={{
+    //             // color: "#00e0ff",
+    //             // textShadow: "0 0 15px rgba(0,224,255,0.7)",
+    //             animation: "fadeInUp 1.2s ease",
+    //           }}
+    //         >
+    //           {slide.title}
+    //         </h1>
+    //         <p
+    //           className="lead mb-4"
+    //           style={{
+    //             color: "#e0e0e0",
+    //             animation: "fadeInUp 1.5s ease",
+    //           }}
+    //         >
+    //           {slide.subtitle}
+    //         </p>
+    //         <button
+    //           className="btn btn-outline-info px-5 py-2 fw-semibold rounded-pill"
+    //           style={{
+    //             borderColor: "#00e0ff",
+    //             // color: "#00e0ff",
+    //             animation: "fadeInUp 2s ease",
+    //           }}
+    //         >
+    //           {slide.btnText}
+    //         </button>
+    //       </div>
+    //     </div>
+    //   ))}
+
+    //   {/* ✅ Manual Navigation Buttons */}
+    //   <button
+    //     onClick={prevSlide}
+
+    //     // className="carousel-btn prev-btn btn position-absolute d-none d-lg-block"
+    //     className={`carousel-btn next-btn btn position-absolute ${window.innerWidth < 768 ? "bg-transparent" : ""}`}
+    //     style={{
+    //       top: "50%",
+    //       left: "3px",
+    //       transform: "translateY(-50%)",
+    //       // backgroundColor: "rgba(0,224,255,0.6)",
+    //       backgroundColor:" #0072ff",
+    //       border: "none",
+    //       borderRadius: "50%",
+    //       // padding: "12px 16px",
+    //       padding: "16px auto",
+    //       zIndex: 10,
+    //     }}
+    //   >
+    //     <ArrowLeft size={20} color="white" />
+    //   </button>
+    //   <button
+    //     onClick={nextSlide}
+    //     // className="carousel-btn next-btn btn position-absolute d-none d-lg-block"
+    //     className={`carousel-btn next-btn btn position-absolute ${window.innerWidth < 768 ? "bg-transparent" : ""}`}
+    //     style={{
+    //       top: "50%",
+    //       right: "3px",
+    //       transform: "translateY(-50%)",
+    //       // backgroundColor: "rgba(0,224,255,0.6)",
+    //       backgroundColor: " #0072ff",
+    //       border: "none",
+    //       borderRadius: "50%",
+    //       padding: "12px 16px",
+    //       zIndex: 10,
+    //     }}
+    //   >
+    //     <ArrowRight size={20} color="white" />
+    //   </button>
+
+    //   {/* ✅ Indicators */}
+    //   <div
+    //     className="d-flex justify-content-center position-absolute w-100"
+    //     style={{ bottom: "30px", zIndex: 10 }}
+    //   >
+    //     {slides.map((_, i) => (
+    //       <div
+    //         key={i}
+    //         onClick={() => setActiveIndex(i)}
+    //         style={{
+    //           width: "12px",
+    //           height: "12px",
+    //           margin: "0 6px",
+    //           borderRadius: "50%",
+    //           cursor: "pointer",
+    //           border: "2px solid #00e0ff",
+    //           backgroundColor: i === activeIndex ? "#00e0ff" : "transparent",
+    //           boxShadow:
+    //             i === activeIndex ? "0 0 10px rgba(0,224,255,0.8)" : "none",
+    //           transition: "all 0.3s ease",
+    //         }}
+    //       ></div>
+    //     ))}
+    //   </div>
+    // </section>
   )
 };
 
