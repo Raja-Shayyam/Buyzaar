@@ -5,9 +5,9 @@ import App from './App.jsx'
 import { StorageProvider } from '../context/store.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    {/* <StorageProvider> */}
+  // <StrictMode>
+    <StorageProvider>
       <App />
-    {/* </StorageProvider> */}
-  </StrictMode>,
+    </StorageProvider>
+  // </StrictMode>,
 )
