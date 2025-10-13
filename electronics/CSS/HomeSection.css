@@ -1,0 +1,92 @@
+/* === Home Section Styling === */
+.home-section {
+  min-height: 90vh;
+  background: radial-gradient(circle at top left, #0a0a0a, #000);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+/* Animated gradient glow backdrop */
+.home-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px at 30% 30%, rgba(0, 195, 255, 0.15), transparent),
+              radial-gradient(800px at 80% 70%, rgba(0, 100, 255, 0.15), transparent);
+  z-index: 0;
+}
+
+.hero-title {
+  font-weight: 700;
+  z-index: 2;
+  position: relative;
+}
+
+.brand-glow {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  max-width: 500px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Buttons */
+.cta-btn {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  border: none;
+  color: #fff !important;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}
+.cta-btn:hover {
+  transform: translateY(-3px);
+  color: #000;
+  box-shadow: 0 0 20px #00c6ff99;
+}
+
+.cta-btn-outline {
+  border: 2px solid #00c6ff;
+  color: #fff !important;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}
+.cta-btn-outline:hover {
+  background: #00c6ff;
+  color: #000 !important;
+}
+
+/* Hero Image */
+.hero-image-container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  filter: drop-shadow(0 0 15px #00c6ff55);
+  transition: 0.4s ease;
+}
+.hero-image:hover {
+  transform: scale(1.03);
+  /* filter: drop-shadow(0 0 25px #00c6ffaa); */
+}
+
+/* Neon Glow Overlay */
+.hero-glow {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 40px;
+  background: radial-gradient(ellipse, rgba(0, 198, 255, 0.4), transparent);
+  filter: blur(25px);
+  border-radius: 50%;
+}

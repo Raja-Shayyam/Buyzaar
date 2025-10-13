@@ -1,0 +1,90 @@
+.cart-section {
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 30%, rgba(0, 198, 255, 0.1), transparent),
+              radial-gradient(circle at 80% 70%, rgba(0, 100, 255, 0.08), transparent);
+  z-index: 0;
+}
+
+.section-title {
+  font-weight: 700;
+}
+
+.brand-glow {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-glow-text {
+  color: #00c6ff;
+}
+
+/* Table & Card Styling */
+.cart-table-wrapper {
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-table-head th {
+  color: #00c6ff;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(0, 198, 255, 0.2);
+}
+
+.cart-row {
+  background: #68829c !important;
+  transition: background 0.3s ease;
+  /* background: rgba(134, 150, 230, 0.989);
+  transition: background 0.3s ease; */
+}
+.cart-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.cart-item-img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border: 2px solid rgba(0, 198, 255, 0.3);
+}
+
+/* Delete Button */
+.cart-del-btn {
+  color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.15);
+  transition: 0.3s;
+}
+.cart-del-btn:hover {
+  background: rgba(255, 77, 77, 0.3);
+  transform: scale(1.1);
+}
+
+/* Summary */
+.cart-summary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #eee;
+}
+
+.checkout-btn {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+.checkout-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px #00c6ff99;
+}
