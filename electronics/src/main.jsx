@@ -6,8 +6,8 @@ import { StorageProvider } from '../context/store.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <StorageProvider>
+    {/* <StorageProvider> */}
       <App />
-    </StorageProvider>
+    {/* </StorageProvider> */}
   </StrictMode>,
 )
