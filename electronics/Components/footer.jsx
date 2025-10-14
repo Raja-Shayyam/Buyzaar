@@ -45,12 +45,12 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="text-light text-decoration-none nav-footer">
-                  Frozen
+                  Products
                 </a>
               </li>
               <li>
                 <a href="#" className="text-light text-decoration-none nav-footer">
-                  Baking &amp; Sweet
+                  Brands &amp; products
                 </a>
               </li>
               <li>
