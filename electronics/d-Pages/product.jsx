@@ -3,15 +3,17 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import ShoppingCart from "react-bootstrap-icons/dist/icons/cart";
 import "../CSS/productsSection.css";
 import { customhook } from "../context/store";
+import useNav from "../Components/NavLink";
 
 const ProductGrid = () => {
-  const { products, setcartItems } = customhook()
+  const { products, setselectedDetails, setcartItems } = customhook()
+  const { navgate } = useNav()
 
   return (
     <div className="product-section py-5">
       <Container>
         <h2 className="text-center mb-5 section-title">
-          Featured Electronic Products
+          Featured Products
         </h2>
 
         <Row className="g-4">
@@ -23,7 +25,14 @@ const ProductGrid = () => {
                 <div className="img-wrapper">
                   <Card.Img variant="top" src={product.img} />
                 </div>
-                <Card.Body>
+                <Card.Body
+                  onClick={
+                    () => {
+                      setselectedDetails(product)
+                      navgate('/ProductDetails') 
+                    }}
+
+                >
                   <h6 className="product-category">{product.category}</h6>
                   <Card.Title className="product-title">
                     {product.name}

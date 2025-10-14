@@ -18,7 +18,7 @@ const BrandsPage = () => {
         <div className="text-center text-light position-relative">
           <h1 className="hero-title">Our Trusted Brands</h1>
           <p className="hero-sub">
-            Partnering with world-leading electronic innovators.
+            Partnering with world-leading innovators.
           </p>
         </div>
       </section>
@@ -27,7 +27,7 @@ const BrandsPage = () => {
       <section className="py-5 brand-showcase">
         <Container>
           <h2 className="text-center mb-5 section-title">
-            Explore Leading Electronics Brands
+            Explore Leading Brands
           </h2>
 
           <Row className="g-4">

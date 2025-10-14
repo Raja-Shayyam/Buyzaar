@@ -10,6 +10,7 @@ import CartSection from "../d-Pages/Cart";
 import CheckoutSection from "../d-Pages/CheckoutDETAILS";
 import  Singup  from "../d-Pages/singup";
 import LoginPage from "../d-Pages/login";
+import ProductDetails from "../d-Pages/ProductDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/singup" element={<Singup />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/product" element={<ProductGrid />} />
+        <Route path="/ProductDetails" element={<ProductDetails />} />
         <Route path="/brand" element={<BrandsPage />} />
         <Route path="/offer" element={<h1>Offers</h1>} />
         <Route path="/cart" element={<CartSection />} />

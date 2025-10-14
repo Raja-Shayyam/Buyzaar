@@ -42,7 +42,7 @@ export const Herosection = () => {
           <Col md={6} className="text-center mt-5 mt-md-0">
             <div className="hero-image-container">
               <img
-                src="https://plus.unsplash.com/premium_photo-1714618807212-d3348f38c903?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1121"
+                src="https://images.unsplash.com/photo-1680292783974-a9a336c10366?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1988"
                 // src="https://plus.unsplash.com/premium_photo-1682124905227-cec770a2ef4a?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332"
                 alt="Smart Living Devices"
                 className="img-fluid hero-image"
