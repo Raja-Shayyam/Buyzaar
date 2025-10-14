@@ -17,24 +17,18 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li className="mb-2 d-flex align-items-center">
                 <i className="ri-map-pin-line"></i>
-                Tulsa road near Save mart house no B/7 Rawalpindi
+                 Hazrat bilal block house no 55 street no 27 kothakalan Morgah Rawalpindi 
               </li>
               <li className="mb-2 d-flex align-items-center">
                 <i className="ri-phone-line"></i>
                 <a href="tel:03348385552" className="text-light text-decoration-none">
-                  0334-8385552
+                  03135775580 
                 </a>
               </li>
               <li className="mb-2 d-flex align-items-center">
                 <i className="ri-phone-line"></i>
                 <a href="tel:03218986351" className="text-light text-decoration-none">
-                  0321-8986351
-                </a>
-              </li>
-              <li className="mb-2 d-flex align-items-center">
-                <i className="ri-phone-line"></i>
-                <a href="tel:03310151854" className="text-light text-decoration-none">
-                  0331-0151854
+                  03070987072
                 </a>
               </li>
             </ul>
