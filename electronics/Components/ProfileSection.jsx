@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Form, Card } from "react-bootstrap";
 import { PencilSquare, CheckCircle, PersonCircle } from "react-bootstrap-icons";
+import { customhook } from "../context/store";
+import { Profileimg } from "./profileimg";
 
 const Profile = () => {
+  const { puser, psetUser } = customhook()
   const [isEditing, setIsEditing] = useState(false);
-  const [user, setUser] = useState({
-    name: "Adrian Khan",
-    email: "adrian.khan@example.com",
-    phone: "+92 300 1234567",
-    role: "Customer",
-    address: "Islamabad, Pakistan",
-    avatar: "https://i.pravatar.cc/150?img=12",
-  });
+  // const [user, setUser] = useState({
+  //   name: "Adrian Khan",
+  //   email: "adrian.khan@example.com",
+  //   phone: "+92 300 1234567",
+  //   role: "Customer",
+  //   address: "Islamabad, Pakistan",
+  //   avatar: "https://i.pravatar.cc/150?img=12",
+  // });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    psetUser({ ...puser, [name]: value });
   };
 
   return (
@@ -38,28 +41,21 @@ const Profile = () => {
                 boxShadow: "0 0 25px rgba(0,224,255,0.1)",
               }}
             >
-              <img
-                src={user.avatar}
-                alt="User Avatar"
-                className="rounded-circle mb-3 shadow-lg"
-                style={{
-                  width: "120px",
-                  height: "120px",
-                  border: "3px solid #00e0ff",
-                  boxShadow: "0 0 20px rgba(0,224,255,0.6)",
-                }}
-              />
+              <div>
+                <Profileimg puser={puser} size={'120px'} />
+
+              </div>
               <h3
-                className="fw-bold mb-1"
-                style={{
+                className="fw-bold mb-1 mt-3"
+                style={{ 
                   color: "#00e0ff",
                   textShadow: "0 0 12px rgba(0,224,255,0.7)",
                 }}
               >
-                {user.name}
+                {puser.name}
               </h3>
-              <p className="text-secondary mb-0">{user.role}</p>
-              <p className="text-secondary">{user.email}</p>
+              <p className="text-secondary mb-0">{puser.role}</p>
+              <p className="text-secondary">{puser.email}</p>
 
               <Button
                 variant="outline-info"
@@ -104,7 +100,7 @@ const Profile = () => {
                   <Form.Control
                     type="text"
                     name="name"
-                    value={user.name}
+                    value={puser.name}
                     onChange={handleChange}
                     disabled={!isEditing}
                     style={{
@@ -120,7 +116,7 @@ const Profile = () => {
                   <Form.Control
                     type="email"
                     name="email"
-                    value={user.email}
+                    value={puser.email}
                     onChange={handleChange}
                     disabled={!isEditing}
                     style={{
@@ -136,13 +132,13 @@ const Profile = () => {
                   <Form.Control
                     type="text"
                     name="phone"
-                    value={user.phone}
+                    value={puser.phone}
                     onChange={handleChange}
                     disabled={!isEditing}
                     style={{
                       backgroundColor: "#112240",
                       border: "1px solid rgba(0,224,255,0.4)",
-                      color: "#e0e0e0",
+                      color: "#e0e0e0 !important",
                     }}
                   />
                 </Form.Group>
@@ -153,7 +149,7 @@ const Profile = () => {
                     as="textarea"
                     rows={2}
                     name="address"
-                    value={user.address}
+                    value={puser.address}
                     onChange={handleChange}
                     disabled={!isEditing}
                     style={{

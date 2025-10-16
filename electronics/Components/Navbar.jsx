@@ -9,9 +9,10 @@ import { customhook } from "../context/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../CSS/NavbarSection.css'
 import useNav from "./NavLink";
+import { Profileimg } from "./profileimg";
 
 const MyNavbar = () => {
-  const { cartItems, ulog } = customhook()
+  const { cartItems, ulog, puser } = customhook()
   const { navgate } = useNav()
 
   return (
@@ -55,7 +56,7 @@ const MyNavbar = () => {
               onClick={() => navgate('/profile')}
               style={{ cursor: 'pointer' }}
             >
-              <PersonCircle size={22} />
+              {puser?  <Profileimg puser={puser} size={'50px'} />: <PersonCircle size={22} /> }
             </div>
             :
             <Button variant="outline-light" className="glass-btn me-3 px-4"
@@ -63,7 +64,7 @@ const MyNavbar = () => {
             >
               Sign In
             </Button>
-            }
+          }
           {/* cartItems.length === 0 ? '': */}
           <div className="cart-icon position-relative p-2 rounded-circle glass-cart"
             onClick={() => navgate('/cart')}

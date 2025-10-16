@@ -86,7 +86,7 @@ const Singup = () => {
               onChange={handleChange}
               required
               style={{
-                // backgroundColor: "#112240",
+                backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
                 color: "black !important",
@@ -107,10 +107,10 @@ const Singup = () => {
               onChange={handleChange}
               required
               style={{
-                // backgroundColor: "#112240",
+                backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
-                color: "#e0e0e0",
+                color: "#e0e0e0 !important",
               }}
             />
           </div>
@@ -128,10 +128,10 @@ const Singup = () => {
               onChange={handleChange}
               required
               style={{
-                // backgroundColor: "#112240",
+                backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
-                color: "#000000ff",
+                // color: "#000000ff",
               }}
             />
           </div>
@@ -149,7 +149,7 @@ const Singup = () => {
               onChange={handleChange}
               required
               style={{
-                // backgroundColor: "#112240",
+                backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
                 color: "#e0e0e0",
