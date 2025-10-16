@@ -6,8 +6,8 @@ import { customhook } from "../context/store";
 import useNav from "../Components/NavLink";
 
 const CartSection = () => {
-  const { cartItems } = customhook()
-  const {navgate} = useNav()
+  const { cartItems, setcartItems } = customhook()
+  const { navgate } = useNav()
 
   // const cartItems = [
   //   { id: 1, name: "Smart LED TV 55”", price: 95000, qty: 1, img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04" },
@@ -23,6 +23,16 @@ const CartSection = () => {
     const numericPrice = Number(item.price.replace(/[^0-9.-]+/g, ""));
     return sum + numericPrice;
   }, 0);
+
+  const handleDelate = (id) => {
+    const newCartItems = cartItems.filter((ci,i)=>{
+      return ci.id !== id
+    })
+    console.log(newCartItems);
+    
+    setcartItems(newCartItems)
+  }
+
   // const total = cartItems.reduce((sum, item) => {console.log('itm ',item);
   // })
 
@@ -36,7 +46,7 @@ const CartSection = () => {
         </h2>
 
         <Row>
-          <Col lg={8}>
+          <Col lg={8} className="mt-2">
             <div className="cart-table-wrapper p-3 rounded-4 shadow-sm">
               <Table className="align-middle mb-0 text-light bg-dark">
                 {/* responsive borderless */}
@@ -65,7 +75,7 @@ const CartSection = () => {
                         </div>
                       </td>
                       <td className="text-center">
-                        <button className="p-2 m-1" onClick={()=>{item.qty = item.qty + 1}}> + </button>
+                        <button className="p-2 m-1" onClick={() => { item.qty = item.qty + 1 }}> + </button>
                         {item.qty}
                       </td>
                       <td className="text-center">Rs. {item.price.toLocaleString()}</td>
@@ -74,6 +84,7 @@ const CartSection = () => {
                           variant="outline-danger"
                           size="sm"
                           className="rounded-circle border-0 cart-del-btn"
+                          onClick={() => { handleDelate(item.id) }}
                         >
                           <Trash3 size={18} />
                         </Button>
@@ -95,14 +106,14 @@ const CartSection = () => {
               </div>
               <div className="d-flex justify-content-between mb-2">
                 <span>Shipping</span>
-                <span>Rs. {total/500}</span>
+                <span>Rs. {total / 500}</span>
               </div>
               <hr className="border-light" />
               <div className="d-flex justify-content-between fw-bold fs-5 mb-4">
                 <span>Total</span>
                 <span className="brand-glow-text">Rs. {(total + 500).toLocaleString()}</span>
               </div>
-              <Button className="w-100 checkout-btn" onClick={()=> navgate('/CheckDetails')}>
+              <Button className="w-100 checkout-btn" onClick={() => navgate('/CheckDetails')}>
                 Proceed to Checkout <ArrowRightCircle className="ms-2" />
               </Button>
             </div>

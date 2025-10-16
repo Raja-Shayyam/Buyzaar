@@ -791,11 +791,12 @@ const products = [
 
   })
   const [user, setUser] = useState([])
+  const [ulog, setUlog] = useState(false)
   console.log(cartItems);
 
 
   return (
-    <StoragePoint.Provider value={{ products, brands, Category, cartItems, setcartItems, user, setUser, setselectedDetails, selectedDetails }}>
+    <StoragePoint.Provider value={{ products, brands, Category, cartItems, setcartItems, user, setUser, setselectedDetails, selectedDetails, ulog, setUlog }}>
       {children}
     </StoragePoint.Provider>
   );

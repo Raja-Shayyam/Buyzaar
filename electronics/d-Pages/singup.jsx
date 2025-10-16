@@ -89,7 +89,7 @@ const Singup = () => {
                 // backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
-                color: "#e0e0e0",
+                color: "black !important",
               }}
             />
           </div>
@@ -131,7 +131,7 @@ const Singup = () => {
                 // backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
                 borderRadius: "10px",
-                color: "#e0e0e0",
+                color: "#000000ff",
               }}
             />
           </div>

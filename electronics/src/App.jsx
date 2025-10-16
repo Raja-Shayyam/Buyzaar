@@ -11,6 +11,7 @@ import CheckoutSection from "../d-Pages/CheckoutDETAILS";
 import  Singup  from "../d-Pages/singup";
 import LoginPage from "../d-Pages/login";
 import ProductDetails from "../d-Pages/ProductDetails";
+import Profile from "../Components/ProfileSection";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/product" element={<ProductGrid />} />
         <Route path="/ProductDetails" element={<ProductDetails />} />
         <Route path="/brand" element={<BrandsPage />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/offer" element={<h1>Offers</h1>} />
         <Route path="/cart" element={<CartSection />} />
         <Route path="/about" element={<AboutSection />} />

@@ -88,7 +88,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <hr className="border-secondary my-4" />
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-          <p className="mb-0">© 2025 | Mere Ghar Ka Zaiqa</p>
+          <p className="mb-0">© 2025 | Buy its for youur Comfort</p>
           <div className="d-flex mt-3 mt-md-0">
             <a href="#" className="text-light me-3">
               <i className="ri-instagram-line"></i>

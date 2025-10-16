@@ -2,16 +2,26 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { CreditCard, Truck, Cash, ArrowRightCircle } from "react-bootstrap-icons";
 import "../CSS/CheckDetails.css";
+import { customhook } from "../context/store";
 
 const CheckoutSection = () => {
+  const { cartItems } = customhook()
   const [payment, setPayment] = useState("card");
+  console.log(cartItems);
 
-  const cartItems = [
-    { id: 1, name: "Smart LED TV 55”", qty: 1, price: 95000 },
-    { id: 2, name: "Wireless Headphones", qty: 2, price: 18000 },
-  ];
-
-  const subtotal = cartItems.reduce((sum, item) => sum + item.qty * item.price, 0);
+  // const cartItems = [
+  //   { id: 1, name: "Smart LED TV 55”", qty: 1, price: 95000 },
+  //   // { id: 2, name: "Wireless Headphones", qty: 2, price: 18000 },
+  // ];
+  let subtotal;
+  if (cartItems.length >= 1) {
+    console.log(cartItems.length);
+    // subtotal = cartItems.reduce((sum, item) => sum + item.qty * item.price, 0);
+    subtotal = cartItems.reduce((sum, item) => {
+      const numericPrice = Number(item.price.replace(/[^0-9.-]+/g, ""));
+      return sum + numericPrice;
+    }, 0);
+  }
   const shipping = 500;
   const total = subtotal + shipping;
 
@@ -91,7 +101,7 @@ const CheckoutSection = () => {
                           type="radio"
                           name="delivery"
                           id="express"
-                          label="Express (1–2 days) *extra 500"
+                          label="Express (1–2 days)"
                         />
                         <span style={{ textDecorationLine: 'underline', color: '#0087ff', marginLeft: '8px' }}> *extra 500</span>
                       </div>
@@ -167,7 +177,7 @@ const CheckoutSection = () => {
                     <span>
                       {item.name} <small>x{item.qty}</small>
                     </span>
-                    <span>Rs. {(item.price * item.qty).toLocaleString()}</span>
+                    <span>Rs. {(Number(item.price.replace(/,/g, "")) * item.qty).toLocaleString()}</span>
                   </li>
                 ))}
               </ul>

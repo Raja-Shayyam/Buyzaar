@@ -23,8 +23,6 @@ const ProductDetails = () => {
   //     avatar: "https://i.pravatar.cc/50?img=47",
   //   },
   // ]);
-  
-
   // const product = {
   //   id: 1,
   //   name: "Smart LED TV 55” 4K UHD",

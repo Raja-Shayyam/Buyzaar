@@ -1,16 +1,30 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { customhook } from "../context/store";
+import useNav from "../Components/NavLink";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });
+  const { user, setUlog } = customhook()
+  const {navgate} = useNav()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+// console.log('> ',user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login data:", form);
+    console.log("Login data:", user,'hi: ', form );
+    if(user.email !== form.email || user.password !== form.password){
+      console.log(user , form);
+      alert('wrong email or password')
+      // navgate('/login')
+    }else{
+      console.log('sucess');
+      setUlog(true)
+      navgate('/Profile')
+    }
   };
 
   return (
@@ -131,6 +145,8 @@ const LoginPage = () => {
               e.target.style.backgroundColor = "#00e0ff";
               e.target.style.boxShadow = "0 0 15px rgba(0,224,255,0.5)";
             }}
+
+            
           >
             Login
           </button>

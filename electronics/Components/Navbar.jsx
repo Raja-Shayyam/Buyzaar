@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
+import { PersonCircle } from 'react-bootstrap-icons'
 import ShoppingCart from "react-bootstrap-icons/dist/icons/cart";
 import LightningChargeFill from "react-bootstrap-icons/dist/icons/lightning-charge-fill";
 import { customhook } from "../context/store";
@@ -10,7 +11,7 @@ import '../CSS/NavbarSection.css'
 import useNav from "./NavLink";
 
 const MyNavbar = () => {
-  const { cartItems } = customhook()
+  const { cartItems, ulog } = customhook()
   const { navgate } = useNav()
 
   return (
@@ -47,20 +48,30 @@ const MyNavbar = () => {
           </Nav>
 
         </Navbar.Collapse>
-          <div className="d-flex align-items-center">
-            <Button variant="outline-light" className="glass-btn me-3 px-4" 
+        <div className="d-flex align-items-center">
+          {ulog ?
+            <div
+              className="profile-icon position-relative p-2 glass-cart me-3"
+              onClick={() => navgate('/profile')}
+              style={{ cursor: 'pointer' }}
+            >
+              <PersonCircle size={22} />
+            </div>
+            :
+            <Button variant="outline-light" className="glass-btn me-3 px-4"
               onClick={() => navgate('/singup')}
             >
               Sign In
             </Button>
-            {/* cartItems.length === 0 ? '': */}
-            <div className="cart-icon position-relative p-2 rounded-circle glass-cart"
-              onClick={() => navgate('/cart')}
-            >
-              <ShoppingCart size={22} />
-              <span className="cart-badge">{cartItems.length === 0 ? '' : cartItems.length}</span>
-            </div>
+            }
+          {/* cartItems.length === 0 ? '': */}
+          <div className="cart-icon position-relative p-2 rounded-circle glass-cart"
+            onClick={() => navgate('/cart')}
+          >
+            <ShoppingCart size={22} />
+            <span className="cart-badge">{cartItems.length === 0 ? '' : cartItems.length}</span>
           </div>
+        </div>
       </Container>
     </Navbar>
   );
