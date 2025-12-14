@@ -1,4 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { apisME, myAllDetails } from "../Axoius/axiousAPI";
+import { toast, ToastContainer } from "react-toastify";
 
 
 export const StoragePoint = createContext();
@@ -690,9 +692,9 @@ export const StorageProvider = ({ children }) => {
       price: "165,000",
       qty: 1,
       img: "https://m.media-amazon.com/images/I/81C8zw3D4YL._AC_SL1500_.jpg",
-      rating: 4.9,
       description:
         "Advanced smartwatch with fitness tracking, blood oxygen monitoring, and ultra-bright Retina display.",
+      rating: 4.9,
       comments: [
         {
           name: "Alex Morgan",
@@ -773,6 +775,7 @@ export const StorageProvider = ({ children }) => {
   // }
 
   const [cartItems, setcartItems] = useState([])
+
   const [selectedDetails, setselectedDetails] = useState({
     id: 0,
     name: "",
@@ -788,8 +791,8 @@ export const StorageProvider = ({ children }) => {
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyIGWfJyxuXwIfAvS_dvmVTUdU3ecMlTeIbQ&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSxA0BXlKbC-b04Jg5k_UXwU7MoYOuATV2SQ&s"
     ]
-
   })
+
   const [user, setUser] = useState({
     email: "",
     username: "",
@@ -802,16 +805,49 @@ export const StorageProvider = ({ children }) => {
   const [puser, psetUser] = useState({
     // name: user.username,
     // email: user.email,
-    name: 'shyyam',
-    email: 'tahir.shm',
-    phone: "+92 300 1234567",
-    role: "Customer",
-    address: "Islamabad, Pakistan",
-    avatar: "https://i.pravatar.cc/150?img=12",
+    // name: '',
+    // email: 'tahir.shm',
+    // phone: "+92 300 1234567",
+    // role: "Customer",
+    // address: "Islamabad, Pakistan",
+    // avatar: "https://i.pravatar.cc/150?img=12",
   });
+
+  const checkMe = async () => {
+    const TK = localStorage.getItem('tk')
+    try {
+      const result = await apisME(TK)
+      console.log(result);
+      if (result.data.match === "matched") {
+        setUser(result.data)
+        console.log('matched');
+
+        const reslt = await myAllDetails(result.data._id)
+        psetUser(reslt.data);
+        //!
+        // psetUser({
+        //   name: result.data.name,
+        //   email: result.data.email,
+        //   phone: "+92 *** *******",
+        //   role: "Customer",
+        //   address: "Islamabad, Pakistan",
+        //   avatar: "https://i.pravatar.cc/150?img=12"
+        // })
+        setUlog(true)
+      }
+    } catch (error) {
+      toast.dismiss(error.response.data.message)
+    }
+
+  }
+  useEffect(() => {
+    console.log('hi');
+    checkMe()
+  }, [ulog])
 
   return (
     <StoragePoint.Provider value={{ products, brands, Category, cartItems, setcartItems, user, setUser, setselectedDetails, selectedDetails, ulog, setUlog, puser, psetUser }}>
+      <ToastContainer autoClose={3000}/>
       {children}
     </StoragePoint.Provider>
   );

@@ -88,3 +88,43 @@
   transform: translateY(-3px);
   box-shadow: 0 0 20px #00c6ff99;
 }
+
+
+/* 12 2025 */
+.qty-wrapper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0, 224, 255, 0.4);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(17, 34, 64, 0.6);
+}
+
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: #00e0ff;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: rgba(0, 224, 255, 0.15);
+}
+
+.qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  width: 40px;
+  text-align: center;
+  font-weight: 600;
+  color: #e0e0e0;
+  font-size: 15px;
+}

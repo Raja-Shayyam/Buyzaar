@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
 import { Trash3, ArrowRightCircle } from "react-bootstrap-icons";
 import "../CSS/CartSection.css";
 import { customhook } from "../context/store";
 import useNav from "../Components/NavLink";
+import { deleteFromCART, userAllinCART } from "../Axoius/axiousAPI";
+import { toast, ToastContainer } from "react-toastify";
 
 const CartSection = () => {
-  const { cartItems, setcartItems } = customhook()
+  const { cartItems, setcartItems, user } = customhook()
   const { navgate } = useNav()
+
+  const [total, setTotal] = useState(0)
 
   // const cartItems = [
   //   { id: 1, name: "Smart LED TV 55”", price: 95000, qty: 1, img: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04" },
@@ -17,19 +21,63 @@ const CartSection = () => {
 
   console.log(cartItems);
 
-  // useEffect(()=>{
+  const run = async () => {
+    try {
+      const result = await userAllinCART(user._id)
+      if (result) {
+        console.log(result);
+        const mycarts = result.data.data
+        console.log(mycarts);
+        setcartItems(mycarts)
+      }
+    } catch (error) {
+      console.log(error);
+      toast.info(error.response.data.message)
+    }
+  }
+  useEffect(() => {
+    run()
+  }, [])
 
-  const total = cartItems.reduce((sum, item) => {
-    const numericPrice = Number(item.price.replace(/[^0-9.-]+/g, ""));
-    return sum + numericPrice;
+  useEffect(() => {
+  const calculatedTotal = cartItems.reduce((sum, item) => {
+    const price = Number(item.price.replace(/,/g, ""));
+    return sum + price * item.quantity;
   }, 0);
 
-  const handleDelate = (id) => {
-    const newCartItems = cartItems.filter((ci,i)=>{
-      return ci.id !== id
+  setTotal(calculatedTotal);
+}, [cartItems]);
+
+
+  const handleQtyChange = (id, change) => {
+    setcartItems(prev =>
+      prev.map(item =>
+        item._id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + change) }
+          : item
+      )
+    );
+  
+  };
+  
+  // setTotal( cartItems.reduce((sum, item) => {
+  //   const numericPrice = Number(item.price.replace(/[^0-9.-]+/g, ""));
+  //   return sum + numericPrice;
+  // }, 0))
+  const handleDelate = async (id) => {
+    console.log(id);
+    
+    try {
+      const result = await deleteFromCART(id)
+      console.log(result);
+      toast.success(result.data.message)
+    } catch (error) {
+      toast.done(error)
+    }
+    const newCartItems = cartItems.filter((ci, i) => {
+      return ci._id !== id
     })
     console.log(newCartItems);
-    
     setcartItems(newCartItems)
   }
 
@@ -40,6 +88,7 @@ const CartSection = () => {
 
   return (
     <section className="cart-section py-5 text-light">
+      <ToastContainer autoClose={2000} />
       <Container>
         <h2 className="text-center mb-4 section-title">
           Your <span className="brand-glow">Shopping Cart</span>
@@ -62,9 +111,10 @@ const CartSection = () => {
                   {cartItems.map((item) => (
                     <tr key={item.id} className="cart-row">
                       <td>
+                        {/* {console.log(item)} */}
                         <div className="d-flex align-items-center">
                           <img
-                            src={item.img}
+                            src={item.image}
                             alt={item.name}
                             className="cart-item-img rounded me-3"
                           />
@@ -75,16 +125,35 @@ const CartSection = () => {
                         </div>
                       </td>
                       <td className="text-center">
-                        <button className="p-2 m-1" onClick={() => { item.qty = item.qty + 1 }}> + </button>
-                        {item.qty}
+                        <div className="qty-wrapper">
+                          <button
+                            className="qty-btn"
+                            onClick={() => handleQtyChange(item._id, -1)}
+                            disabled={item.quantity <= 1}
+                          >
+                            −
+                          </button>
+
+                          <span className="qty-value">{item.quantity}</span>
+
+                          <button
+                            className="qty-btn"
+                            onClick={() => handleQtyChange(item._id, 1)}
+                            disabled={item.quantity >= 7}
+                          >
+                            +
+                          </button>
+                        </div>
                       </td>
-                      <td className="text-center">Rs. {item.price.toLocaleString()}</td>
+
+                      {/* <td className="text-center">Rs. {item.price.toLocaleString()}</td> */}
+                      <td className="text-center">Rs. {(Number((item.price).replaceAll(',', '')) * item.quantity).toLocaleString()}</td>
                       <td className="text-center">
                         <Button
                           variant="outline-danger"
                           size="sm"
                           className="rounded-circle border-0 cart-del-btn"
-                          onClick={() => { handleDelate(item.id) }}
+                          onClick={() => { handleDelate(item._id) }}
                         >
                           <Trash3 size={18} />
                         </Button>

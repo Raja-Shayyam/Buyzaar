@@ -12,6 +12,7 @@ import  Singup  from "../d-Pages/singup";
 import LoginPage from "../d-Pages/login";
 import ProductDetails from "../d-Pages/ProductDetails";
 import Profile from "../Components/ProfileSection";
+import { UserDetailspage } from "../d-Pages/userDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeSection />} />
         <Route path="/singup" element={<Singup />} />
+        <Route path="/userDetails" element={<UserDetailspage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/product" element={<ProductGrid />} />
         <Route path="/ProductDetails" element={<ProductDetails />} />

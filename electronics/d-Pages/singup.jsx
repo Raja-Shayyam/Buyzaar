@@ -11,10 +11,13 @@ import { Link } from "react-router-dom";
 import '../CSS/SignupSection.css'
 import { customhook } from "../context/store";
 import useNav from "../Components/NavLink";
+import { apiRegister } from "../Axoius/axiousAPI";
+import { ToastContainer, toast } from 'react-toastify'
 
 const Singup = () => {
   const { setUser, user } = customhook()
-  const {navgate} = useNav()
+  const { navgate } = useNav()
+  const [passShow, setPassShow] = useState(true)
   const [form, setForm] = useState({
     email: "",
     username: "",
@@ -22,22 +25,39 @@ const Singup = () => {
     confirmPassword: "",
   });
 
+  const handlePassShow = (t) => {
+    setPassShow((p) => !p)
+  }
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup form submitted:", form);
     if (user.email !== form.email) {
-      setUser(form)
-      setForm({
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-      })
-      navgate('/login')
+      if (form.password === form.confirmPassword) {
+        // setUser(form)
+        const result = await apiRegister(form)
+        if (result) {
+          console.log(result);
+          // setUser(result.data.data)
+          toast.success(result.data.message)
+          setForm({
+            email: "",
+            username: "",
+            password: "",
+            confirmPassword: "",
+          })
+          setTimeout(() => {
+            navgate('/login')
+          }, 2000);
+        }
+      }
+      else {
+        alert('password mis matched')
+      }
     } else {
       alert('user Exists with same cedintials !!! ')
     }
@@ -47,7 +67,7 @@ const Singup = () => {
     <section
       className="d-flex align-items-center justify-content-center h-100"
       style={{
-        padding:'50px 0',
+        padding: '50px 0',
         background: "linear-gradient(180deg, #0d1b2a 0%, #1b263b 100%)",
         color: "#e0e0e0",
       }}
@@ -73,6 +93,7 @@ const Singup = () => {
         </h2>
 
         <form onSubmit={handleSubmit}>
+          <ToastContainer autoClose={false}/>
           <div className="mb-3">
             <label className="form-label ms-1" style={{ color: "#9baec8" }}>
               Email Address
@@ -93,9 +114,9 @@ const Singup = () => {
               }}
             />
           </div>
-          
+
           <div className="mb-3">
-            <label className="form-label" style={{ color: "#9baec8", marginLeft:'4px' }}>
+            <label className="form-label" style={{ color: "#9baec8", marginLeft: '4px' }}>
               User Name
             </label>
             <input
@@ -119,21 +140,33 @@ const Singup = () => {
             <label className="form-label ms-1" style={{ color: "#9baec8" }}>
               Password
             </label>
-            <input
-              type="password"
-              name="password"
-              className="form-control text-light"
-              placeholder="Enter password"
-              value={form.password}
-              onChange={handleChange}
-              required
+            <div className='form-control'
               style={{
                 backgroundColor: "#112240",
                 border: "1px solid rgba(0,224,255,0.4)",
-                borderRadius: "10px",
-                // color: "#000000ff",
               }}
-            />
+            >
+              <input
+                type={`${passShow && 'password'}`}
+                name="password"
+                className="pass-inp  text-light"
+                placeholder="Enter password"
+                value={form.password}
+                onChange={handleChange}
+                required
+                style={{
+                  // backgroundColor: "#112240",
+                  // border: 'transparent',
+                  // border: "1px solid rgba(0,224,255,0.4)",
+                  // borderRadius: "10px",
+                  // // color: "#000000ff",
+                  width: '70%'
+                }}
+              />
+              <button className='my-1 mx-1 pass-inp text-light' type="button"
+                onClick={() => handlePassShow()}
+              >show</button>
+            </div>
           </div>
 
           <div className="mb-4">

@@ -2,29 +2,44 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { customhook } from "../context/store";
 import useNav from "../Components/NavLink";
+import { apiLogin } from "../Axoius/axiousAPI";
+import { ToastContainer, toast } from 'react-toastify'
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });
-  const { user, setUlog } = customhook()
-  const {navgate} = useNav()
+  const { user, setUser, setUlog, } = customhook()
+  const { navgate } = useNav()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-// console.log('> ',user);
+  // console.log('> ',user);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login data:", user,'hi: ', form );
-    if(user.email !== form.email || user.password !== form.password){
-      console.log(user , form);
-      alert('wrong email or password')
-      // navgate('/login')
-    }else{
-      console.log('sucess');
+    console.log("Login data:", user, 'hi: ', form);
+    const result = await apiLogin(form)
+    console.log(result);
+    toast.success(result.data.message)
+    toast.info(result.data.user[1])
+
+    if (result.data.sucess) {
+      localStorage.setItem('tk',result.data.tk)
       setUlog(true)
-      navgate('/Profile')
+      // setUser(result.data.data)
+      setTimeout(() => {
+        navgate('/Profile')
+      }, 2000);
     }
+    // if(user.email !== form.email || user.password !== form.password){
+    //   console.log(user , form);
+    //   alert('wrong email or password')
+    //   // navgate('/login')
+    // }else{
+    //   console.log('sucess');
+    //   setUlog(true)
+    //   navgate('/Profile')
+    // }
   };
 
   return (
@@ -56,6 +71,7 @@ const LoginPage = () => {
         </h2>
 
         <form onSubmit={handleSubmit}>
+          <ToastContainer autoClose={false} />
           {/* Email */}
           <div className="mb-3">
             <label className="form-label" style={{ color: "#9baec8" }}>
@@ -146,7 +162,7 @@ const LoginPage = () => {
               e.target.style.boxShadow = "0 0 15px rgba(0,224,255,0.5)";
             }}
 
-            
+
           >
             Login
           </button>
@@ -159,7 +175,7 @@ const LoginPage = () => {
         >
           Don’t have an account?{" "}
           <Link
-            to="/signup"
+            to="/singup"
             style={{
               color: "#00e0ff",
               textDecoration: "none",

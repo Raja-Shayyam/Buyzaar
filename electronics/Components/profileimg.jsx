@@ -1,9 +1,11 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 
 export const Profileimg = ({puser, size}) => {
+console.log(puser);
+
   return (
     <img
-      src={puser.avatar}
+     src={puser?.data?.profilePicture || 'https://i.pravatar.cc/150?img=12'}
       alt="User Avatar"
       className="rounded-circle shadow-lg"
       style={{
